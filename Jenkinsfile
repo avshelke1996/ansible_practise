@@ -6,6 +6,24 @@ pipeline{
         }
     }
     stages{
+        steps {
+        sh '''
+            echo "Pipeline user:"
+            whoami
+
+            echo "Home directory:"
+            echo "$HOME"
+
+            echo "SSH directory:"
+            ls -la "$HOME/.ssh" || true
+
+            echo "SSH test:"
+            ssh -o BatchMode=yes \
+                -o StrictHostKeyChecking=yes \
+                172.31.9.12 hostname
+        '''
+    }
+        
         stage("clean"){
             steps{
                 echo "cleaning"
