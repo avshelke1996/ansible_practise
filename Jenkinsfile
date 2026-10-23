@@ -16,6 +16,7 @@ pipeline{
         stage("build"){
             steps{
                 echo "building"
+                sh "ansbile all -bm dnf -a 'pkg=java-21-amazon-corretto.x86_64 state=present'"
                 sh "ansible qalinux[0] -bm get_url -a 'url=https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.61/bin/apache-tomcat-10.1.61.zip dest=tomcat'"
                 sh "ansible qalinux[0] -ba 'unzip tomcat/apache-tomcat-10.1.61.zip -d tomcat'"
                 sh "ansible qalinux[0] -ba 'chmod -R 777 /home/avi/tomcat'"
