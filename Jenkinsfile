@@ -6,7 +6,8 @@ pipeline{
         }
     }
     stages{
-        steps {
+        stage('Check SSH') {
+    steps {
         sh '''
             echo "Pipeline user:"
             whoami
@@ -23,6 +24,8 @@ pipeline{
                 172.31.9.12 hostname
         '''
     }
+}
+
         
         stage("clean"){
             steps{
